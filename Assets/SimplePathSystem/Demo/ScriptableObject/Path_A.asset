@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b1ce0e2d2242144aba00ab4e03767c, type: 3}
+  m_Name: Path_A
+  m_EditorClassIdentifier: Assembly-CSharp::PathDataAsset
+  points:
+  - handleMode: 0
+    position: {x: 0, y: 0, z: 0}
+    tangentIn: {x: -1, y: 0, z: 0}
+    tangentOut: {x: 1, y: 0, z: 0}
+    speed: 5
+  - handleMode: 1
+    position: {x: 4.4207597, y: 3.119955, z: 5}
+    tangentIn: {x: 3.8073213, y: 1.5016737, z: 6.575176}
+    tangentOut: {x: 5.034198, y: 4.7382364, z: 3.4248242}
+    speed: 10
+  - handleMode: 1
+    position: {x: 7.9979424, y: 0.00000016663338, z: 10.370514}
+    tangentIn: {x: 10.095946, y: 0.62163496, z: 9.438301}
+    tangentOut: {x: 5.8999386, y: -0.6216346, z: 11.302727}
+    speed: 5
+  - handleMode: 1
+    position: {x: 68.62669, y: -0.0000004671664, z: -58.946228}
+    tangentIn: {x: 68.021255, y: -3.0580168, z: -63.33396}
+    tangentOut: {x: 69.23213, y: 3.0580158, z: -54.558495}
+    speed: 5
+  - handleMode: 1
+    position: {x: 30.529593, y: 3.435339, z: 10.170712}
+    tangentIn: {x: 29.529593, y: 3.435339, z: 10.170712}
+    tangentOut: {x: 31.529593, y: 3.435339, z: 10.170712}
+    speed: 5

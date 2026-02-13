@@ -3,24 +3,76 @@ using System.Collections.Generic;
 
 public class PathCreator : MonoBehaviour
 {
-    public List<PathPoint> points = new List<PathPoint>();
+    #region Fields & Properties
+    [HideInInspector] 
+    public PathDataAsset pathDataAsset;
+    
+    [SerializeField] 
+    private List<PathPoint> _workingPoints = new List<PathPoint>();
 
-    [Range(5, 50)] public int segmentResolution = 20; // 곡선 구간당 정점 수
+    public List<PathPoint> Points => _workingPoints;
 
+    private int segmentResolution = 20; // Number of vertices per curve segment
+
+    #endregion
+
+    #region Asset Synchronization (ScriptableObject <-> Workspace)
+    /// <summary>
+    /// SO -> Work Space
+    /// </summary>
+    public void LoadFromAsset()
+    {
+        if (pathDataAsset == null) return;
+
+        _workingPoints.Clear();
+        foreach (var p in pathDataAsset.points)
+        {
+            _workingPoints.Add(new PathPoint(p)); 
+        }
+    }
+
+    /// <summary>
+    /// Work Space -> SO
+    /// </summary>
+    public void SaveToAsset()
+    {
+        if (pathDataAsset == null) return;
+
+        UnityEditor.Undo.RecordObject(pathDataAsset, "Save Path to SO");
+
+        pathDataAsset.points.Clear();
+        foreach (var p in _workingPoints)
+        {
+            pathDataAsset.points.Add(new PathPoint(p));
+        }
+
+        UnityEditor.EditorUtility.SetDirty(pathDataAsset);
+        UnityEditor.AssetDatabase.SaveAssets();
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Path Initialization
+    /// </summary>
     public void CreateDefaultPath()
     {
-        points.Clear();
-        points.Add(new PathPoint(Vector3.zero));
-        points.Add(new PathPoint(Vector3.forward * 5f));
+        if (pathDataAsset == null) return;
+
+        _workingPoints.Clear();
+        _workingPoints.Add(new PathPoint(Vector3.zero));
+        _workingPoints.Add(new PathPoint(Vector3.forward * 5f));
+
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 
     public List<PathData> GetPathData()
     {
         List<PathData> result = new List<PathData>();
-        for (int i = 0; i < points.Count - 1; i++)
+        for (int i = 0; i < _workingPoints.Count - 1; i++)
         {
-            PathPoint p1 = points[i];
-            PathPoint p2 = points[i + 1];
+            PathPoint p1 = _workingPoints[i];
+            PathPoint p2 = _workingPoints[i + 1];
 
             for (int j = 0; j <= segmentResolution; j++)
             {
@@ -36,7 +88,10 @@ public class PathCreator : MonoBehaviour
         return result;
     }
 
-    // Bezier 수식 헬퍼 클래스
+    
+    /// <summary>
+    /// Bezier Utility
+    /// </summary>
     public static class Bezier
     {
         public static Vector3 GetPoint(Vector3 a, Vector3 b, Vector3 c, Vector3 d, float t)

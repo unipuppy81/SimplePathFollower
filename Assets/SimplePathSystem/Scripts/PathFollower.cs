@@ -3,71 +3,102 @@ using UnityEngine;
 
 public class PathFollower : MonoBehaviour
 {
-    public PathCreator pathCreator;
-    public Transform lookAtTarget; // 바라볼 특정 오브젝트
+    public Transform lookAtTarget;
     public bool isLoop = false;
 
-    private List<PathData> _path;
+    #region Runtime State
+
+    private List<PathPoint> _activePoints;
     private int _currentPointIndex = 0;
     private bool _isAutoMoving = true;
+    #endregion
 
-    private void Awake()
+    #region Public Controls
+
+    /// <summary>
+    /// Starts movement along the given path data.
+    /// </summary>
+    public void StartMoving(PathDataAsset pathData)
     {
-        pathCreator = GetComponent<PathCreator>();
+        if (pathData == null || pathData.points == null || pathData.points.Count == 0)
+        {
+            Debug.LogWarning($"<color=red>[PathFollower]</color> Assigned path data is empty.");
+            return;
+        }
+
+        _activePoints = new List<PathPoint>(pathData.points);
+        _currentPointIndex = 0;
+        _isAutoMoving = true;
+
+        transform.position = _activePoints[0].position;
     }
 
-    private void Start()
+    /// <summary>
+    /// Stops movement.
+    /// </summary>
+    public void StopMoving()
     {
-        if (pathCreator != null)
+        _isAutoMoving = false;
+    }
+    #endregion
+
+    private void Update()
+    {
+        if (!_isAutoMoving || _activePoints == null || _activePoints.Count == 0) return;
+
+        MoveStep();
+        HandleRotation();
+    }
+
+    /// <summary>
+    /// Move Logic
+    /// </summary>
+    private void MoveStep()
+    {
+        PathPoint targetPoint = _activePoints[_currentPointIndex];
+        float speed = targetPoint.speed;
+
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetPoint.position,
+            speed * Time.deltaTime
+        );
+
+        // Check arrival at current target
+        if (Vector3.Distance(transform.position, targetPoint.position) < 0.001f)
         {
-            _path = pathCreator.GetPathData();
-            if (_path.Count > 0)
+            _currentPointIndex++;
+
+            if (_currentPointIndex >= _activePoints.Count)
             {
-                transform.position = _path[0].position; // 시작 위치로 강제 이동
+                if (isLoop)
+                {
+                    _currentPointIndex = 0;
+                }
+                else
+                {
+                    _isAutoMoving = false;
+                }
             }
         }
     }
 
-    private void Update()
+    /// <summary>
+    /// Rotation Logic
+    /// </summary>
+    private void HandleRotation()
     {
-        if (_path == null || _path.Count == 0 || !_isAutoMoving) return;
-
-        // 1. 이동 로직
-        PathData currentTarget = _path[_currentPointIndex];
-        float currentSpeed = currentTarget.speed;
-        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, currentSpeed * Time.deltaTime);
-
-        // 2. 시선 처리
         if (lookAtTarget != null)
         {
             transform.LookAt(lookAtTarget);
         }
-
-        // 3. 다음 점으로 갱신
-        if (Vector3.Distance(transform.position, currentTarget.position) < 0.01f)
+        else if (_activePoints != null && _currentPointIndex < _activePoints.Count)
         {
-            _currentPointIndex++;
-
-            // 경로 끝에 도달하면 처음으로 (Loop)
-            if (_currentPointIndex >= _path.Count)
+            Vector3 direction = _activePoints[_currentPointIndex].position - transform.position;
+            if (direction != Vector3.zero)
             {
-                if (isLoop)
-                {
-                    _currentPointIndex = 0; // 처음으로 되돌림
-                }
-                else
-                {
-                    _currentPointIndex = _path.Count - 1;
-                    _isAutoMoving = false; // 이동 중지
-                }
+                transform.rotation = Quaternion.LookRotation(direction);
             }
         }
-    }
-
-    public void ResetFollower()
-    {
-        _currentPointIndex = 0;
-        _isAutoMoving = true;
-        if (_path != null && _path.Count > 0) transform.position = _path[0].position;
     }
 }

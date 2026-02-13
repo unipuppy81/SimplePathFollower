@@ -463,7 +463,6 @@ GameObject:
   - component: {fileID: 1370108372}
   - component: {fileID: 1370108371}
   - component: {fileID: 1370108375}
-  - component: {fileID: 1370108376}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -576,43 +575,95 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04cbf85de3d3c74abeb31479a95ac94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathFollower
-  pathCreator: {fileID: 0}
   lookAtTarget: {fileID: 6633024}
   isLoop: 0
---- !u!114 &1370108376
+--- !u!1 &1636029512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636029514}
+  - component: {fileID: 1636029515}
+  m_Layer: 0
+  m_Name: PathCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1636029514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636029512}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1636029515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370108369}
+  m_GameObject: {fileID: 1636029512}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab965d61cf4f99b40869012a62f7c8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathCreator
-  points:
-  - handleMode: 1
+  pathDataAsset: {fileID: 11400000, guid: b0d11ed09eb487b46ad668344aa56272, type: 2}
+  _workingPoints:
+  - handleMode: 0
     position: {x: 0, y: 0, z: 0}
     tangentIn: {x: -1, y: 0, z: 0}
     tangentOut: {x: 1, y: 0, z: 0}
     speed: 5
   - handleMode: 1
-    position: {x: 0, y: 5.604747, z: 5}
-    tangentIn: {x: 3.2631874, y: 6.134778, z: 4.001976}
-    tangentOut: {x: -3.2631874, y: 5.0747156, z: 5.998024}
-    speed: 2
-  - handleMode: 0
-    position: {x: -7.6243157, y: 2.0474453, z: 2.154518}
-    tangentIn: {x: -9.507857, y: 9.655081, z: -14.410614}
-    tangentOut: {x: -10.319191, y: 0.8781884, z: -1.73981}
+    position: {x: 4.4207597, y: 3.119955, z: 5}
+    tangentIn: {x: 3.8073213, y: 1.5016737, z: 6.575176}
+    tangentOut: {x: 5.034198, y: 4.7382364, z: 3.4248242}
     speed: 10
   - handleMode: 1
-    position: {x: -12.028529, y: 2.8871589, z: 0.5962852}
-    tangentIn: {x: -12.441341, y: 1.6639075, z: 0.7418778}
-    tangentOut: {x: -11.615717, y: 4.11041, z: 0.45069265}
+    position: {x: 7.9979424, y: 0.00000016663338, z: 10.370514}
+    tangentIn: {x: 10.095946, y: 0.62163496, z: 9.438301}
+    tangentOut: {x: 5.8999386, y: -0.6216346, z: 11.302727}
     speed: 5
-  segmentResolution: 50
+  - handleMode: 1
+    position: {x: 7.6551266, y: 5.1538897, z: 0.32389942}
+    tangentIn: {x: 12.722132, y: 5.4200125, z: 2.0701303}
+    tangentOut: {x: 2.5881214, y: 4.887767, z: -1.4223316}
+    speed: 5
+  - handleMode: 1
+    position: {x: 22.69621, y: 11.777763, z: 14.923334}
+    tangentIn: {x: 22.153864, y: 9.774752, z: 16.866186}
+    tangentOut: {x: 23.238558, y: 13.780775, z: 12.980482}
+    speed: 5
+  - handleMode: 1
+    position: {x: 83.402275, y: 8.995432, z: -34.228237}
+    tangentIn: {x: 82.402275, y: 8.995432, z: -34.228237}
+    tangentOut: {x: 84.402275, y: 8.995432, z: -34.228237}
+    speed: 5
+  - handleMode: 1
+    position: {x: 68.62669, y: -0.0000004671664, z: -58.946228}
+    tangentIn: {x: 68.021255, y: -3.0580168, z: -63.33396}
+    tangentOut: {x: 69.23213, y: 3.0580158, z: -54.558495}
+    speed: 5
+  - handleMode: 1
+    position: {x: 25.864347, y: 3.435339, z: 10.023382}
+    tangentIn: {x: 24.864347, y: 3.435339, z: 10.023382}
+    tangentOut: {x: 26.864347, y: 3.435339, z: 10.023382}
+    speed: 5
+  segmentResolution: 30
 --- !u!1 &2010986783
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,3 +786,4 @@ SceneRoots:
   - {fileID: 2010986787}
   - {fileID: 6633024}
   - {fileID: 1370108374}
+  - {fileID: 1636029514}
