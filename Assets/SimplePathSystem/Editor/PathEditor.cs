@@ -151,13 +151,21 @@ public class PathEditor : Editor
 
             EditorGUI.BeginChangeCheck();
 
+            // Basic Properties
             p.speed = EditorGUILayout.FloatField("Movement Speed", p.speed);
             p.handleMode = (PathPoint.HandleMode)EditorGUILayout.EnumPopup("Handle Mode", p.handleMode);
             p.position = EditorGUILayout.Vector3Field("Position", p.position);
 
+            // Path Event Property
+            p.eventName = EditorGUILayout.TextField("Event Name", p.eventName);
+
             if (EditorGUI.EndChangeCheck())
             {
                 Undo.RecordObject(_creator, "Update Point Property");
+
+                // If p is a class, the above changes are already applied. 
+                // If p is a struct, you might need: _creator.Points[_selectedIndex] = p;
+
                 EditorUtility.SetDirty(_creator);
                 SceneView.RepaintAll();
             }

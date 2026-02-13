@@ -13,6 +13,8 @@ public class PathFollower : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f; 
     [SerializeField] private bool lockYRotation = true; // y-axis fix option
 
+    public System.Action<string> OnPathEvent;
+
     #region Runtime State
     private List<PathData> _sampledPath = new List<PathData>();
     private int _currentPointIndex = 0;
@@ -79,6 +81,12 @@ public class PathFollower : MonoBehaviour
                 data.position = Bezier.GetPoint(p1.position, p1.tangentOut, p2.tangentIn, p2.position, t);
                 data.speed = Mathf.Lerp(p1.speed, p2.speed, t);
 
+                // Insert Event
+                if (j == segmentResolution)
+                    data.triggeredEvent = p2.eventName;
+                else if (i == 0 && j == 0)
+                    data.triggeredEvent = p1.eventName;
+
                 _sampledPath.Add(data);
             }
         }
@@ -101,6 +109,12 @@ public class PathFollower : MonoBehaviour
         // Check arrival at current target
         if (Vector3.Distance(transform.position, targetData.position) < 0.001f)
         {
+            if(!string.IsNullOrEmpty(targetData.triggeredEvent))
+            {
+                ExecuteEvent(targetData.triggeredEvent);
+            }
+
+
             _currentPointIndex++;
 
             if (_currentPointIndex >= _sampledPath.Count)
@@ -157,5 +171,40 @@ public class PathFollower : MonoBehaviour
     {
         Vector3 currentEuler = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, currentEuler.y, 0);
+    }
+
+    /// <summary>
+    /// Handles the execution of path-linked events.
+    /// This serves as the primary bridge to external game logic and systems.
+    /// </summary>
+    /// <param name="eventName">The unique identifier for the event to trigger</param>
+    private void ExecuteEvent(string eventName)
+    {
+        Debug.Log($"<color=yellow>[PathEvent]</color> Trigger Event: {eventName}");
+
+        // 1. Notify external subscribers via Action delegate (Decoupled Architecture)
+        OnPathEvent?.Invoke(eventName);
+
+        // 2. Integration with Animator component
+        // Example: GetComponent<Animator>()?.SetTrigger(eventName);
+
+        // 3. [OR] Integration with external Managers or custom logic:
+        /*
+            // A. Global Game State Management
+            // GameManager.Instance.NotifyPointReached(eventName);
+
+            // B. Audio & Visual Feedback Systems
+            // SoundManager.Instance.PlayEffect(eventName);
+            // EffectManager.Instance.SpawnAt(transform.position, eventName);
+
+            // C. Quest & Progression logic (Relevant to RPG frameworks)
+            // QuestManager.Instance.CheckMissionObjective(eventName);
+
+            // D. Environment Interaction
+            // TriggerObjectInteraction(eventName);
+
+            // E. Broadcasting to other scripts on this GameObject
+            // SendMessage(eventName, SendMessageOptions.DontRequireReceiver);
+        */
     }
 }

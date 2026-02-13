@@ -28,6 +28,9 @@ public class PathPoint
 
     public float speed = 5f;
 
+    // Event name triggered when this point is reached
+    public string eventName;
+
     // Copy constructor
     public PathPoint(PathPoint source)
     {
@@ -36,6 +39,7 @@ public class PathPoint
         this.tangentOut = source.tangentOut;
         this.handleMode = source.handleMode;
         this.speed = source.speed;
+        this.eventName = source.eventName;
     }
 
     // Default constructor
@@ -53,4 +57,5 @@ public struct PathData
 {
     public Vector3 position;
     public float speed;
+    public string triggeredEvent;
 }
