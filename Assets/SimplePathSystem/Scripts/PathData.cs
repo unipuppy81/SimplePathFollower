@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -47,6 +48,7 @@ public class PathPoint
     }
 }
 
+[System.Serializable]
 public struct PathData
 {
     public Vector3 position;

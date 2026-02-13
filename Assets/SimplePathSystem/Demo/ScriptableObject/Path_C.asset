@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b1ce0e2d2242144aba00ab4e03767c, type: 3}
+  m_Name: Path_C
+  m_EditorClassIdentifier: Assembly-CSharp::PathDataAsset
+  points:
+  - handleMode: 1
+    position: {x: 12.152028, y: 0.00000025371628, z: 6.584505}
+    tangentIn: {x: 13.152028, y: 1.0000002, z: 6.584505}
+    tangentOut: {x: 15.152028, y: 3.0000002, z: 6.584505}
+    speed: 5
+  - handleMode: 1
+    position: {x: 16.594929, y: -0.00000017195543, z: -11.340599}
+    tangentIn: {x: 17.594929, y: 0.9999998, z: -11.340599}
+    tangentOut: {x: 19.594929, y: 2.9999998, z: -11.340599}
+    speed: 5
+  - handleMode: 1
+    position: {x: -0.8423755, y: 0.00000007320068, z: -34.33047}
+    tangentIn: {x: 0.15762448, y: 1.0000001, z: -34.33047}
+    tangentOut: {x: 2.1576245, y: 3, z: -34.33047}
+    speed: 5
+  - handleMode: 1
+    position: {x: -21.69674, y: -0.00000027346232, z: -15.347816}
+    tangentIn: {x: -20.69674, y: 0.9999997, z: -15.347816}
+    tangentOut: {x: -18.69674, y: 2.9999998, z: -15.347816}
+    speed: 5
+  - handleMode: 1
+    position: {x: 0.7632889, y: -0.00000017498701, z: 11.923593}
+    tangentIn: {x: 1.763289, y: 0.9999998, z: 11.923593}
+    tangentOut: {x: 3.763289, y: 2.9999998, z: 11.923593}
+    speed: 5
+  - handleMode: 1
+    position: {x: 28.305855, y: 0.000000096649956, z: 11.036711}
+    tangentIn: {x: 29.305855, y: 1.0000001, z: 11.036711}
+    tangentOut: {x: 31.305855, y: 3, z: 11.036711}
+    speed: 5
+  - handleMode: 1
+    position: {x: 46.959873, y: -0.00000006612527, z: -36.06751}
+    tangentIn: {x: 47.959873, y: 0.99999994, z: -36.06751}
+    tangentOut: {x: 49.959873, y: 3, z: -36.06751}
+    speed: 5
+  - handleMode: 1
+    position: {x: -8.2786455, y: -0.00000024048427, z: -81.74503}
+    tangentIn: {x: -7.2786455, y: 0.99999976, z: -81.74503}
+    tangentOut: {x: -5.2786455, y: 2.9999998, z: -81.74503}
+    speed: 5
