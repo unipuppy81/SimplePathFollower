@@ -1,2 +1,2 @@
-# Motion-Sketcher
-Motion Sketcher
+# Simple Path Follower
+Simple Path Follower
