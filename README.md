@@ -26,6 +26,8 @@ $$B(t) = (1-t)^3P_0 + 3(1-t)^2tP_1 + 3(1-t)t^2P_2 + t^3P_3, \quad 0 \le t \le 1$
 
 이 공식은 매끄러운 곡선을 보장할 뿐만 아니라, 프로그래밍적으로 경로를 세밀하게 샘플링하여 일정한 이동 속도를 구현하는 기초가 됩니다.
 
+![게임 플레이](Assets/SimplePathSystem/GIF/playmv2.gif)
+
 ---
 
 ## 💠 2. 특징 (Features)
@@ -60,7 +62,10 @@ $$B(t) = (1-t)^3P_0 + 3(1-t)^2tP_1 + 3(1-t)t^2P_2 + t^3P_3, \quad 0 \le t \le 1$
 * **환경 오브젝트:** 정해진 궤적을 순찰하는 몬스터나 일정한 패턴으로 움직이는 이동 발판
 * **이벤트 연출:** 특정 지점 도달 시 이벤트를 발생시켜 연출용 이펙트나 사운드 재생
 
+![게임 플레이](Assets/SimplePathSystem/GIF/playmv1.gif)
+
 ---
+
 
 ## 💠 5. 환경 (Environment)
 * **Unity Version:** Unity 6 (6000.x.x) 이상
